@@ -13,8 +13,11 @@ const loginUser = async (req, res) => {
   }
   const { email, password } = req.body;
   //Call repository of user
-  userRepository.login({ email, password });
-  res.send("Login success");
+  const user = await userRepository.login({ email, password });
+  res.status(200).json({
+    "message": "ok",
+    data: user
+  });
 };
 
 const registerUser = async (req, res) => {
