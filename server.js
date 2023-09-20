@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv';
 import userRouter from './routes/user.js';
 import commonApp from './routes/index.js';
 import mongoose from 'mongoose';
+import connectDB from './DB/database.js';
 // import { create } from './models/productModel';
 // import { Product } from './models/productModel';
 
@@ -16,6 +17,7 @@ app.use(express.json());
 const DBString = process.env.DATABASE_URL 
 const port = process.env.PORT || 8888;
 app.listen(port, ()=>{
+    connectDB()
     console.log(`Server listening on port ${port}`);
 });
 app.use(commonApp);
@@ -52,10 +54,10 @@ app.use(commonApp);
 // });
 
 // //connect to mongodb
-mongoose.connect(DBString).then(()=>{
-    app.listen(9999, ()=>{
-        console.log("Server listening on port 9999")
-    })
-}).catch((err)=>{
-    console.log(err.message)
-})
+// mongoose.connect(DBString).then(()=>{
+//     app.listen(9999, ()=>{
+//         console.log("Server listening on port 9999")
+//     })
+// }).catch((err)=>{
+//     console.log(err.message)
+// })

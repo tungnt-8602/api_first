@@ -17,15 +17,19 @@ const register = async({
     phoneNumber,
     address
 }) =>{
+    // debugger
     const userExited = await User.findOne({ email}).exec()
     if(userExited != null){
         throw new Error("User exited")
     }
     //Hash password before create user
-    const hashPassword = bcrypt.hash(password, parseInt(process.env.SECRET_KEY))
+    const hashPassword = await bcrypt.hash(password, parseInt(process.env.SECRET_KEY))
 
-    const newUser = await User.create({name, email, password, phoneNumber, address})
-    console.log(newUser.email)
+    const newUser = await User.create({name, email, password: hashPassword, phoneNumber, address})
+    return {
+        ...newUser._doc,
+        password: "cc"
+    }
 }
 
 export default {
