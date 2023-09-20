@@ -1,8 +1,4 @@
-import {} from "./userController.js"
-// const commonApp = express();
-
-// commonApp.use('/products', productRouter);
-// commonApp.use('/users', userRouter);
+import userController from './user.js'
 
 export {
     userController
